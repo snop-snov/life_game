@@ -80,11 +80,21 @@ function check(row,col,new_world){
   var lifeCount = 0;
   for (var i = row-1; i <= row+1; ++i) {
     for (var j = col-1; j <= col+1; ++j){
-      if(i >= 0 && i < rows)
-        if(j >= 0 && j < cols)
-          if(!(i==row && j==col))
-            if(world[i][j])
-              ++lifeCount;
+      if(!(i==row && j==col)){
+        var tmp_i = i;
+        var tmp_j = j;
+        if(i < 0)
+          tmp_i = rows - 1;
+        if(j < 0)
+          tmp_j = cols - 1;
+        if(i > rows - 1)
+          tmp_i = 0;
+        if(j > cols - 1)
+          tmp_j = 0;
+
+        if(world[tmp_i][tmp_j])
+          ++lifeCount;
+      }
     }
   }
   if (lifeCount == 3) {
