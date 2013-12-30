@@ -4,9 +4,9 @@ td {
 }
 
 .life {
-  background-color: #c7c1c1;
+  background-color: black;
 }
 
 .dead {
-  background-color: black;
+  background-color: #c7c1c1;
 }
