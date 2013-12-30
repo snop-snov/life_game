@@ -1,0 +1,12 @@
+td {
+  width: 5px;
+  height: 5px;
+}
+
+.life {
+  background-color: #c7c1c1;
+}
+
+.dead {
+  background-color: black;
+}
