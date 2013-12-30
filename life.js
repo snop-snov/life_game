@@ -5,10 +5,10 @@ dead = "dead"
 life = "life"
 
 function initWorld() {
-  for(var i = 0; i < N; ++i ) {
+  for(var i = 0; i < N; ++i) {
     world.push([])
     for(var j = 0; j < N; ++j) {
-      world[i].push(false)
+      world[i].push(Math.random() > 0.5)
     }
   }
 }
@@ -47,6 +47,7 @@ $(document).ready(function() {
 
   initWorld();
   initWorldLayout();
+  renderWorld();
 
   for(;;) {
     setTimeout(1000)
@@ -55,29 +56,29 @@ $(document).ready(function() {
       for(var j = 0; j < N; ++j) {
         var around = []
 
-        if(i < N && j < N)
-          arount.push(world[i+1][j+1])
+        if(i < N-1 && j < N-1)
+          around.push(world[i+1][j+1])
 
-        if(j < N)
-          arount.push(world[i][j+1])
+        if(j < N-1)
+          around.push(world[i][j+1])
 
-        if(i < N)
-          arount.push(world[i+1][j])
+        if(i < N-1)
+          around.push(world[i+1][j])
 
-        if(i > 0 && j < N)
-          arount.push(world[i-1][j+1])
+        if(i > 0 && j < N-1)
+          around.push(world[i-1][j+1])
 
-        if(i < N && j > 0)
-          arount.push(world[i+1][j-1])
+        if(i < N-1 && j > 0)
+          around.push(world[i+1][j-1])
 
-        if(i < N && j < N)
-          arount.push(world[i-1][j-1])
+        if(i > 0 && j > 0)
+          around.push(world[i-1][j-1])
 
         if(i > 0)
-          arount.push(world[i-1][j])
+          around.push(world[i-1][j])
 
         if(j > 0)
-          arount.push(world[i][j-1])
+          around.push(world[i][j-1])
 
         var count = 0
         for(var k = 0; k < around.lenght; ++k) {
