@@ -12,48 +12,49 @@ function initWorld() {
       world[i].push(false)
     }
   }
-  world[51][52] = true
-  world[52][53] = true
-  world[53][51] = true
-  world[53][52] = true
-  world[53][53] = true
 
-  world[6][2]   = true
-  world[6][3]   = true
-  world[5][2]   = true
-  world[5][3]   = true
-  world[4][12]  = true
-  world[5][12]  = true
-  world[6][12]  = true
-  world[3][13]  = true
-  world[7][13]  = true
-  world[2][14]  = true
-  world[8][14]  = true
-  world[2][15]  = true
-  world[8][15]  = true
-  world[5][16]  = true
-  world[3][17]  = true
-  world[7][17]  = true
-  world[4][18]  = true
-  world[5][18]  = true
-  world[6][18]  = true
-  world[5][19]  = true
-  world[6][22]  = true
-  world[7][22]  = true
-  world[8][22]  = true
-  world[6][23]  = true
-  world[7][23]  = true
-  world[8][23]  = true
-  world[5][24]  = true
-  world[9][24]  = true
-  world[4][26]  = true
-  world[5][26]  = true
-  world[9][26]  = true
-  world[10][26] = true
-  world[7][36]  = true
-  world[8][36]  = true
-  world[7][37]  = true
-  world[8][37]  = true
+  world[71][32] = true
+  world[72][33] = true
+  world[73][31] = true
+  world[73][32] = true
+  world[73][33] = true
+
+  world[46][42]   = true
+  world[46][43]   = true
+  world[45][42]   = true
+  world[45][43]   = true
+  world[44][52]  = true
+  world[45][52]  = true
+  world[46][52]  = true
+  world[43][53]  = true
+  world[47][53]  = true
+  world[42][54]  = true
+  world[48][54]  = true
+  world[42][55]  = true
+  world[48][55]  = true
+  world[45][56]  = true
+  world[43][57]  = true
+  world[47][57]  = true
+  world[44][58]  = true
+  world[45][58]  = true
+  world[46][58]  = true
+  world[45][59]  = true
+  world[46][62]  = true
+  world[47][62]  = true
+  world[48][62]  = true
+  world[46][63]  = true
+  world[47][63]  = true
+  world[48][63]  = true
+  world[45][64]  = true
+  world[49][64]  = true
+  world[44][66]  = true
+  world[45][66]  = true
+  world[49][66]  = true
+  world[50][66] = true
+  world[47][76]  = true
+  world[48][76]  = true
+  world[47][77]  = true
+  world[48][77]  = true
 }
 
 function initWorldLayout() {
