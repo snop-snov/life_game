@@ -4,30 +4,42 @@ var cols = 100;
 var world = [];
 var death = 'death';
 var life = 'life';
+var tmr_id = 0;
 
 $(document).ready(function(){
-  console.log("init");
+  $('#set_size_btn').on('click', function() {
+    rows = parseInt($('#rows').val());
+    cols = parseInt($('#cols').val());
+    reset();
+  });
+
+
+  reset();
+});
+
+function reset(){
+  world = [];
   initContent();
   initWorld(world);
 
-  world[50][50] = true;
-  world[51][51] = true;
-  world[52][51] = true;
-  world[52][50] = true;
-  world[52][49] = true;
+  world[5][5] = true;
+  world[6][6] = true;
+  world[7][6] = true;
+  world[7][5] = true;
+  world[7][4] = true;
 
   initWorldState();
-});
+}
 
 function initContent(){
   var table = $("#content");
+  table.html('');
   for (var i = 0; i < rows; ++i) {
     var tr = "<tr>";
     for (var j = 0; j < cols; ++j){
       tr += "<td id='" + i + "-" + j + "'></td>";
     }
     tr += "</tr>";
-    console.log(tr);
     table.append(tr);
   }
 }
@@ -53,33 +65,38 @@ function initWorldState(){
   }
 }
 
-function check(row,col){
+function check(row,col,new_world){
   var lifeCount = 0;
   for (var i = row-1; i <= row+1; ++i) {
     for (var j = col-1; j <= col+1; ++j){
       if(i >= 0 && i < rows)
         if(j >= 0 && j < cols)
-          if(i!=row && j!=col)
+          if(!(i==row && j==col))
             if(world[i][j])
               ++lifeCount;
     }
   }
-  if (lifeCount == 3)
-    $("#" + row + "-" + col).removeClass(death).addClass(life);
+  if (lifeCount == 3) {
+    new_world[row][col] = true;
+  }
 
-  if (lifeCount < 2 && lifeCount > 3)
-    $("#" + row + "-" + col).removeClass(life).addClass(death);
-
+  if (lifeCount < 2 || lifeCount > 3) {
+    new_world[row][col] = false;
+  }
 }
 
-function life(){
+function life_step(){
   new_world = [];
   initWorld(new_world);
   for (var i = 0; i < rows; ++i) {
     for (var j = 0; j < cols; ++j){
-
+      new_world[i][j] = world[i][j];
+      check(i, j, new_world);
     }
   }
+  world = new_world;
+
+  initWorldState();
 }
 
 
