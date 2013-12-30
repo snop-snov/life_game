@@ -25,7 +25,22 @@ $(document).ready(function(){
     clearInterval(tmr_id);
     life_step();
   });
+
   reset();
+
+  $('#content td').on('click', function() {
+    row_col_arr = $(this).attr('id').split('-');
+    row = parseInt(row_col_arr[0]);
+    col = parseInt(row_col_arr[1]);
+
+    is_life = world[row][col];
+    world[row][col] = !is_life;
+    if (is_life) {
+      $("#" + row + "-" + col).removeClass(life).addClass(death);
+    } else {
+      $("#" + row + "-" + col).removeClass(death).addClass(life);
+    }
+  });
 });
 
 function reset(){
@@ -81,16 +96,8 @@ function check(row,col,new_world){
   for (var i = row-1; i <= row+1; ++i) {
     for (var j = col-1; j <= col+1; ++j){
       if(!(i==row && j==col)){
-        var tmp_i = i;
-        var tmp_j = j;
-        if(i < 0)
-          tmp_i = rows - 1;
-        if(j < 0)
-          tmp_j = cols - 1;
-        if(i > rows - 1)
-          tmp_i = 0;
-        if(j > cols - 1)
-          tmp_j = 0;
+        var tmp_i = lineLoop(i, rows);
+        var tmp_j = lineLoop(j, cols);
 
         if(world[tmp_i][tmp_j])
           ++lifeCount;
@@ -104,6 +111,14 @@ function check(row,col,new_world){
   if (lifeCount < 2 || lifeCount > 3) {
     new_world[row][col] = false;
   }
+}
+
+function lineLoop(x, len){
+  if(x < 0)
+    return (len - 1);
+  if(x > len - 1)
+    return 0;
+  return x;
 }
 
 function life_step(){
