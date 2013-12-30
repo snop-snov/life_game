@@ -13,7 +13,18 @@ $(document).ready(function(){
     reset();
   });
 
+  $('#play').on('click', function() {
+    tmr_id = setInterval(life_step, 200);
+  });
 
+  $('#stop').on('click', function() {
+    clearInterval(tmr_id);
+  });
+
+  $('#step').on('click', function() {
+    clearInterval(tmr_id);
+    life_step();
+  });
   reset();
 });
 
