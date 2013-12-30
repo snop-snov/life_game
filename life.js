@@ -43,55 +43,54 @@ function renderWorld() {
   }
 }
 
-$(document).ready(function() {
+function lifeCycle(){
+  for(var i = 0; i < N; ++i ) {
+    for(var j = 0; j < N; ++j) {
+      var around = []
 
+      if(i < N-1 && j < N-1)
+        around.push(world[i+1][j+1])
+
+      if(j < N-1)
+        around.push(world[i][j+1])
+
+      if(i < N-1)
+        around.push(world[i+1][j])
+
+      if(i > 0 && j < N-1)
+        around.push(world[i-1][j+1])
+
+      if(i < N-1 && j > 0)
+        around.push(world[i+1][j-1])
+
+      if(i > 0 && j > 0)
+        around.push(world[i-1][j-1])
+
+      if(i > 0)
+        around.push(world[i-1][j])
+
+      if(j > 0)
+        around.push(world[i][j-1])
+
+      var count = 0
+      for(var k = 0; k < around.length; ++k) {
+        count += (around[k] ? 1 : 0)
+      }
+
+      if(count == 3)
+        world[i][j] = true
+      else if((count < 2) || (count > 3))
+        world[i][j] = false
+    }
+  }
+
+  renderWorld();
+  setTimeout(lifeCycle, 200)
+}
+
+$(document).ready(function() {
   initWorld();
   initWorldLayout();
   renderWorld();
-
-  for(;;) {
-    setTimeout(1000)
-
-    for(var i = 0; i < N; ++i ) {
-      for(var j = 0; j < N; ++j) {
-        var around = []
-
-        if(i < N-1 && j < N-1)
-          around.push(world[i+1][j+1])
-
-        if(j < N-1)
-          around.push(world[i][j+1])
-
-        if(i < N-1)
-          around.push(world[i+1][j])
-
-        if(i > 0 && j < N-1)
-          around.push(world[i-1][j+1])
-
-        if(i < N-1 && j > 0)
-          around.push(world[i+1][j-1])
-
-        if(i > 0 && j > 0)
-          around.push(world[i-1][j-1])
-
-        if(i > 0)
-          around.push(world[i-1][j])
-
-        if(j > 0)
-          around.push(world[i][j-1])
-
-        var count = 0
-        for(var k = 0; k < around.lenght; ++k) {
-          count += (around ? 1 : 0)
-        }
-
-        if(count == 3)
-          world[i][j] = true
-        else if((count < 2) || (count > 3))
-          world[i][j] = false
-      }
-    }
-
-  }
-
+  window.setTimeout(lifeCycle, 1000);
 })
