@@ -7,6 +7,15 @@ var life = 'life';
 var tmr_id = 0;
 
 $(document).ready(function(){
+  reset();
+  set_event_handlers();
+});
+
+function stopInterval(){
+  clearInterval(tmr_id);
+}
+
+function set_event_handlers() {
   $('#set_size_btn').on('click', function() {
     rows = parseInt($('#rows').val());
     cols = parseInt($('#cols').val());
@@ -14,34 +23,34 @@ $(document).ready(function(){
   });
 
   $('#play').on('click', function() {
+    stopInterval();
     tmr_id = setInterval(life_step, 200);
   });
 
   $('#stop').on('click', function() {
-    clearInterval(tmr_id);
+    stopInterval();
   });
 
   $('#step').on('click', function() {
-    clearInterval(tmr_id);
+    stopInterval();
     life_step();
   });
 
-  reset();
-
   $('#content td').on('click', function() {
-    row_col_arr = $(this).attr('id').split('-');
+    cell = $(this);
+    row_col_arr = cell.attr('id').split('-');
     row = parseInt(row_col_arr[0]);
     col = parseInt(row_col_arr[1]);
 
     is_life = world[row][col];
     world[row][col] = !is_life;
     if (is_life) {
-      $("#" + row + "-" + col).removeClass(life).addClass(death);
+      cell.removeClass(life).addClass(death);
     } else {
-      $("#" + row + "-" + col).removeClass(death).addClass(life);
+      cell.removeClass(death).addClass(life);
     }
   });
-});
+}
 
 function reset(){
   world = [];
@@ -134,5 +143,3 @@ function life_step(){
 
   initWorldState();
 }
-
-
