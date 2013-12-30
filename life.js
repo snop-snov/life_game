@@ -8,9 +8,14 @@ function initWorld() {
   for(var i = 0; i < N; ++i) {
     world.push([])
     for(var j = 0; j < N; ++j) {
-      world[i].push(Math.random() > 0.5)
+      world[i].push(false)
     }
   }
+  world[1][2] = true
+  world[2][3] = true
+  world[3][1] = true
+  world[3][2] = true
+  world[3][3] = true
 }
 
 function initWorldLayout() {
@@ -44,7 +49,9 @@ function renderWorld() {
 }
 
 function lifeCycle(){
+  var newWorld = []
   for(var i = 0; i < N; ++i ) {
+    newWorld.push([])
     for(var j = 0; j < N; ++j) {
       var around = []
 
@@ -78,11 +85,15 @@ function lifeCycle(){
       }
 
       if(count == 3)
-        world[i][j] = true
+        newWorld[i].push(true)
       else if((count < 2) || (count > 3))
-        world[i][j] = false
+        newWorld[i].push(false)
+      else
+        newWorld[i].push(world[i][j])
     }
   }
+
+  world = newWorld
 
   renderWorld();
   setTimeout(lifeCycle, 200)
