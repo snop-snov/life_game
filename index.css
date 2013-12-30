@@ -1,0 +1,13 @@
+.life {
+  background-color: #FFFFFF;
+}
+
+.death {
+  background-color: #000000;
+}
+
+td {
+  height: 3px;
+  width: 3px;
+  border: 1px solid black;
+}
